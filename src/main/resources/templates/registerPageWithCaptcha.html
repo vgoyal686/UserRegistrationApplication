@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title th:utext="${title}"></title>
+      <style>
+         th, td {
+         padding: 5px;
+         }
+         td span  {
+         font-size:90%;
+         font-style: italic;
+         color: red;
+         }
+         .error {
+         color: red;
+         font-style: italic;
+         }
+      </style> 
+      <script src='https://www.google.com/recaptcha/api.js'></script>   
+   </head>
+   <body>
+      <th:block th:include="/menu"></th:block>
+       
+      <h2>Register</h2>
+       
+      <div th:if="${errorMessage != null}"
+           th:utext="${errorMessage}" class="error">...</div>
+       
+      <form th:action="@{/register}" th:object="${userForm}" method="POST">  
+      	
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" th:field="*{name}" /></td>
+               <td>
+                  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Email</td>
+               <td><input type="text" th:field="*{email}" /> </td>
+               <td>
+                  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Password</td>
+               <td><input type="password" th:field="*{password}" /> </td>
+               <td>
+                  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Confirm</td>
+               <td><input type="password" th:field="*{confirmPassword}" /> </td>
+               <td>
+                  <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
+               </td>
+            </tr>
+         </table> 
+             </div>
+           		<div class="form-group">
+           			<div class="g-recaptcha" data-sitekey="6Ld0-OcUAAAAAGBSjbGqGEhyT7HSYi2v-Xe84vej"></div>
+            </div>
+            <br> <input type="submit" value="Submit" />
+                  <a th:href="@{/}">Cancel</a>  
+      </form>
+       
+   </body>
+</html>

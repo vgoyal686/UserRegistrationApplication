@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title th:utext="${title}"></title>
+   </head>
+    
+   <style>
+      table th, table td {
+         padding: 5px;
+      }
+      .message {
+         color: blue;
+      }
+   </style>
+    
+   <body>
+    
+      <th:block th:include="/menu"></th:block>  
+       
+      <h2>Users</h2>
+       
+    
+       
+      <table border="1">
+            <tr>
+               <th>Name</th>
+               <th>Email</th>
+            </tr>
+            <tr th:each ="user : ${users}">
+               <td th:utext="${user.name}">...</td>
+               <td th:utext="${user.email}">...</td>
+            </tr>
+      </table>
+       
+   </body>
+</html>
